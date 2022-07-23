@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 // Import the firebase_core and cloud_firestore plugin
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_learning_firebase/page/home_page.dart';
+import 'package:flutter_learning_firebase/page/user_page.dart';
 
 bool shouldUseFirestoreEmulator = false;
 
@@ -26,50 +28,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final controller = TextEditingController();
-
-  Future createUser({required String name}) async {
-    // Reference to document
-    final docUser = FirebaseFirestore.instance.collection("users").doc("my-id");
-    final json = {
-      'name': name,
-      'age': 21,
-      'birthday': DateTime(2001, 7, 28),
-    };
-    await docUser.set(json);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: TextField(controller: controller),
-        actions: [
-          IconButton(
-            onPressed: () {
-              final name = controller.text;
-              createUser(name: name);
-            },
-            icon: const Icon(Icons.add),
-          )
-        ],
-      ),
-      body: Center(),
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (context) =>const HomePage(title: "home"),
+        '/user': (context) => const UserPage(),
+    },
     );
   }
 }

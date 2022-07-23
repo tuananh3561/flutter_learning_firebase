@@ -9,10 +9,6 @@ bool shouldUseFirestoreEmulator = false;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
-  if (shouldUseFirestoreEmulator) {
-    FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
-  }
   runApp(const MyApp());
 }
 

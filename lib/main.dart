@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 // Import the firebase_core and cloud_firestore plugin
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 bool shouldUseFirestoreEmulator = false;
 
@@ -18,9 +17,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Learning Firebase',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Learning Firebase',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: HomePage());
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Home"),
       ),
     );
   }
